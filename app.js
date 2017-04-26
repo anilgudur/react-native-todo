@@ -23,8 +23,17 @@ export default class App extends Component {
             items: [],
             dataSource: ds.cloneWithRows([])
         }
+        this.setSource = this.setSource.bind(this);
         this.handleAddItem = this.handleAddItem.bind(this);
         this.handleToggleAllComplete = this.handleToggleAllComplete.bind(this);
+    }
+
+    setSource(items, itemsDatasource, otherState = {}) {
+        this.setState({
+            items,
+            dataSource: this.state.dataSource.cloneWithRows(itemsDatasource), 
+            ... otherState
+        })
     }
 
     handleToggleAllComplete() {
@@ -34,10 +43,11 @@ export default class App extends Component {
             complete
         }))
         console.table(newItems);
-        this.setState({
-            items: newItems,
-            allComplete: complete
-        })
+        this.setSource(newItems, newItems, {allComplete: complete})
+        // this.setState({
+        //     items: newItems,
+        //     allComplete: complete
+        // })
     }
 
     handleAddItem() {
@@ -50,10 +60,11 @@ export default class App extends Component {
                 complete:   false
             }
         ]
-        this.setState({
-            items: newItems,
-            value: "Enter any values: "
-        })
+        this.setSource(newItems, newItems, {value: "Enter any values: "})
+        // this.setState({
+        //     items: newItems,
+        //     value: "Enter any values: "
+        // })
         console.log(newItems);
         console.log(this.state);
     }
