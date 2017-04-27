@@ -2,15 +2,26 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
+  Switch,
   Text,
   View
 } from 'react-native';
 
 export default class Row extends Component {
   render() {
+
+    const { complete } = this.props;
+
     return (
       <View style={styles.container}>
-          <Text style={styles.text}>{this.props.text}</Text>
+          <Switch 
+              //value={this.props.complete} 
+              value={complete} 
+              onValueChange={this.props.onComplete}
+          />
+          <View style={styles.textWrap}>
+                <Text style={[styles.text, this.props.complete && styles.complete]}>{this.props.text}</Text>
+          </View>
       </View>
     );
   }
@@ -26,5 +37,12 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         color: "#4d4d4d"
+    },
+    textWrap: {
+        flex:1,
+        marginHorizontal: 10
+    },
+    complete: {
+        textDecorationLine: "line-through"
     }
 })

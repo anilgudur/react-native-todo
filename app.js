@@ -26,6 +26,7 @@ export default class App extends Component {
         this.setSource = this.setSource.bind(this);
         this.handleAddItem = this.handleAddItem.bind(this);
         this.handleToggleAllComplete = this.handleToggleAllComplete.bind(this);
+        this.handleToggleComplete = this.handleToggleComplete.bind(this);
     }
 
     setSource(items, itemsDatasource, otherState = {}) {
@@ -34,6 +35,18 @@ export default class App extends Component {
             dataSource: this.state.dataSource.cloneWithRows(itemsDatasource), 
             ... otherState
         })
+    }
+
+    handleToggleComplete(key, complete) {
+        const newItems = this.state.items.map((item) => {
+            if (item.key !== key) return item;
+            return {
+                ... item,
+                complete
+            }
+        })
+        console.table(newItems);
+        this.setSource(newItems, newItems);
     }
 
     handleToggleAllComplete() {
@@ -76,7 +89,7 @@ export default class App extends Component {
                     value={this.state.value} 
                     onAddItem={this.handleAddItem} 
                     onChange={(value) => this.setState({value})} 
-                    onToggleAllComplete={this.handleToggleAllComplete}
+                    onToggleAllComplete={this.handleToggleAllComplete} 
                 />
                 <View style={styles.content}>
                     <ListView 
@@ -88,6 +101,7 @@ export default class App extends Component {
                             return (
                                 <Row 
                                     key={key} 
+                                    onComplete={(complete) => this.handleToggleComplete(key, complete)}
                                     { ... value }
                                 />
                             )
