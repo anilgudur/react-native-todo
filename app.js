@@ -141,6 +141,7 @@ export default class App extends Component {
                 <Footer 
                     filter={this.state.filter} 
                     onFilter={this.handleFilter} 
+                    count={filterItems('ACTIVE', this.state.items).length}
                 />
             </View>
         );
