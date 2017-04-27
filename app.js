@@ -6,7 +6,8 @@ import {
   Text,
   View,
   ListView,
-  Keyboard
+  Keyboard,
+  AsyncStorage
 } from 'react-native';
 import Header from "./header";
 import Footer from "./footer";
@@ -41,12 +42,24 @@ export default class App extends Component {
         this.handleClearComplete = this.handleClearComplete.bind(this);
     }
 
+    componentWillMount() {
+        AsyncStorage.getItem("items").then((json) => {
+            try {
+                const items = JSON.parse(json);
+                this.setSource(items, items);
+            } catch(e) {
+                console.log("Unparsable data: "+e);
+            }
+        })
+    }
+
     setSource(items, itemsDatasource, otherState = {}) {
         this.setState({
             items,
             dataSource: this.state.dataSource.cloneWithRows(itemsDatasource), 
             ... otherState
         })
+        AsyncStorage.setItem("items", JSON.stringify(items));
     }
 
     handleFilter(filter) {

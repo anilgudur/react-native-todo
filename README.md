@@ -16,4 +16,6 @@ step-08-filter 511118e "08-egghead-react-filter-items-in-the-react-native-list-v
 
 step-09-count 1fcc3a6 "09-egghead-react-add-the-total-remaining-item-count-to-the-footer-with-react-native-text"
 
-step-10-clear-all-complete - "10-egghead-react-add-a-clear-all-complete-button-to-the-footer-with-react-native-touchableopacity"
+step-10-clear-all-complete 8ce259b "10-egghead-react-add-a-clear-all-complete-button-to-the-footer-with-react-native-touchableopacity"
+
+step-11-asyncstorage-persist - "11-egghead-react-persist-items-with-react-native-asyncstorage"
