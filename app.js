@@ -12,6 +12,14 @@ import Header from "./header";
 import Footer from "./footer";
 import Row from "./row";
 
+const filterItems = (filter, items) => {
+    return items.filter((item) => {
+        if (filter === 'ALL') return true;
+        if (filter === 'ACTIVE') return !item.complete;
+        if (filter === 'COMPLETED') return item.complete;
+    })
+}
+
 export default class App extends Component {
 
     constructor(props) {
@@ -19,6 +27,7 @@ export default class App extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             allComplete: false,
+            filter: 'ALL',
             value: "Enter first time: ",
             items: [],
             dataSource: ds.cloneWithRows([])
@@ -28,6 +37,7 @@ export default class App extends Component {
         this.handleToggleAllComplete = this.handleToggleAllComplete.bind(this);
         this.handleToggleComplete = this.handleToggleComplete.bind(this);
         this.handleRemoveItem = this.handleRemoveItem.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
     }
 
     setSource(items, itemsDatasource, otherState = {}) {
@@ -36,6 +46,10 @@ export default class App extends Component {
             dataSource: this.state.dataSource.cloneWithRows(itemsDatasource), 
             ... otherState
         })
+    }
+
+    handleFilter(filter) {
+        this.setSource(this.state.items, filterItems(filter, this.state.items), {filter});
     }
 
     handleToggleComplete(key, complete) {
@@ -47,7 +61,8 @@ export default class App extends Component {
             }
         })
         console.table(newItems);
-        this.setSource(newItems, newItems);
+        //this.setSource(newItems, newItems);
+        this.setSource(newItems, filterItems(this.state.filter, newItems));
     }
 
     handleToggleAllComplete() {
@@ -57,7 +72,8 @@ export default class App extends Component {
             complete
         }))
         console.table(newItems);
-        this.setSource(newItems, newItems, {allComplete: complete})
+        //this.setSource(newItems, newItems, {allComplete: complete})
+        this.setSource(newItems, filterItems(this.state.filter, newItems), {allComplete: complete})
         // this.setState({
         //     items: newItems,
         //     allComplete: complete
@@ -74,7 +90,8 @@ export default class App extends Component {
                 complete:   false
             }
         ]
-        this.setSource(newItems, newItems, {value: "Enter any values: "})
+        //this.setSource(newItems, newItems, {value: "Enter any values: "})
+        this.setSource(newItems, filterItems(this.state.filter, newItems), {value: "Enter any values: "})
         // this.setState({
         //     items: newItems,
         //     value: "Enter any values: "
@@ -87,7 +104,8 @@ export default class App extends Component {
         const newItems = this.state.items.filter((item) => {
             return item.key !== key
         })
-        this.setSource(newItems, newItems);
+        //this.setSource(newItems, newItems);
+        this.setSource(newItems, filterItems(this.state.filter, newItems));
     }
 
     render() {
@@ -120,7 +138,10 @@ export default class App extends Component {
                         }}
                     />
                 </View>
-                <Footer />
+                <Footer 
+                    filter={this.state.filter} 
+                    onFilter={this.handleFilter} 
+                />
             </View>
         );
     }

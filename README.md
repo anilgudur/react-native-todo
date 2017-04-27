@@ -10,4 +10,6 @@ step-05-listview b671dae "05-egghead-react-create-a-list-of-items-with-a-react-n
 
 step-06-switch-complete-toggle 34e3e40 "06-egghead-react-add-a-complete-toggle-with-react-native-switch"
 
-step-07-touchableopacity-remove - "07-egghead-react-add-a-remove-item-button-to-each-row-with-react-native-touchableopacity"
+step-07-touchableopacity-remove 7a289c2 "07-egghead-react-add-a-remove-item-button-to-each-row-with-react-native-touchableopacity"
+
+step-08-filter - "08-egghead-react-filter-items-in-the-react-native-list-view"
