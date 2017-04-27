@@ -8,4 +8,6 @@ step-05.1-listview 46146dd "05-egghead-react-create-a-list-of-items-with-a-react
 
 step-05-listview b671dae "05-egghead-react-create-a-list-of-items-with-a-react-native-listview"
 
-step-06-switch-complete-toggle - "06-egghead-react-add-a-complete-toggle-with-react-native-switch"
+step-06-switch-complete-toggle 34e3e40 "06-egghead-react-add-a-complete-toggle-with-react-native-switch"
+
+step-07-touchableopacity-remove - "07-egghead-react-add-a-remove-item-button-to-each-row-with-react-native-touchableopacity"

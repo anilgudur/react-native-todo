@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Switch,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -22,6 +23,9 @@ export default class Row extends Component {
           <View style={styles.textWrap}>
                 <Text style={[styles.text, this.props.complete && styles.complete]}>{this.props.text}</Text>
           </View>
+          <TouchableOpacity onPress={this.props.onRemove}>
+                <Text style={styles.destroy}>X</Text>
+          </TouchableOpacity>
       </View>
     );
   }
@@ -44,5 +48,9 @@ const styles = StyleSheet.create({
     },
     complete: {
         textDecorationLine: "line-through"
+    },
+    destroy: {
+        fontSize: 20,
+        color: "#CC9A9A"
     }
 })
