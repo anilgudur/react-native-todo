@@ -14,4 +14,6 @@ step-07-touchableopacity-remove 7a289c2 "07-egghead-react-add-a-remove-item-butt
 
 step-08-filter 511118e "08-egghead-react-filter-items-in-the-react-native-list-view"
 
-step-09-count - "09-egghead-react-add-the-total-remaining-item-count-to-the-footer-with-react-native-text"
+step-09-count 1fcc3a6 "09-egghead-react-add-the-total-remaining-item-count-to-the-footer-with-react-native-text"
+
+step-10-clear-all-complete - "10-egghead-react-add-a-clear-all-complete-button-to-the-footer-with-react-native-touchableopacity"
