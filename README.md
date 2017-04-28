@@ -21,3 +21,5 @@ step-10-clear-all-complete 8ce259b "10-egghead-react-add-a-clear-all-complete-bu
 step-11-asyncstorage-persist b993752 "11-egghead-react-persist-items-with-react-native-asyncstorage"
 
 step-12-activityindicator-loading 50177b1 "12-egghead-react-add-a-loading-indicator-while-loading-items-with-react-native-activityindicator"
+
+step-13-inline-edit f83e6a2 "13-egghead-react-inline-edit-todo-items-in-a-react-native-listview"
