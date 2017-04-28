@@ -31,7 +31,7 @@ export default class App extends Component {
             loading: true,
             allComplete: false,
             filter: 'ALL',
-            value: "Enter first time: ",
+            value: "",
             items: [],
             dataSource: ds.cloneWithRows([])
         }
@@ -42,6 +42,8 @@ export default class App extends Component {
         this.handleRemoveItem = this.handleRemoveItem.bind(this);
         this.handleFilter = this.handleFilter.bind(this);
         this.handleClearComplete = this.handleClearComplete.bind(this);
+        this.handleToggleEditing = this.handleToggleEditing.bind(this);
+        this.handleUpdateText = this.handleUpdateText.bind(this);
     }
 
     componentWillMount() {
@@ -110,7 +112,7 @@ export default class App extends Component {
             }
         ]
         //this.setSource(newItems, newItems, {value: "Enter any values: "})
-        this.setSource(newItems, filterItems(this.state.filter, newItems), {value: "Enter any values: "})
+        this.setSource(newItems, filterItems(this.state.filter, newItems), {value: ""})
         // this.setState({
         //     items: newItems,
         //     value: "Enter any values: "
@@ -132,6 +134,29 @@ export default class App extends Component {
         this.setSource(newItems, filterItems(this.state.filter, newItems));
     }
 
+    handleToggleEditing(key, editing) {
+        const newItems = this.state.items.map((item) => {
+            if (key !== item.key) return item;
+            return {
+                ... item,
+                editing
+            }
+        })
+        this.setSource(newItems, filterItems(this.state.filter, newItems));
+    }
+
+    handleUpdateText(key, text) {
+        const newItems = this.state.items.map((item) => {
+            if (key !== item.key) return item;
+            return {
+                ... item,
+                text
+            }
+        })
+        this.setSource(newItems, filterItems(this.state.filter, newItems));
+    }
+
+
     render() {
         return (
             <View style={styles.container}>
@@ -152,7 +177,9 @@ export default class App extends Component {
                                 <Row 
                                     key={key} 
                                     onComplete={(complete) => this.handleToggleComplete(key, complete)} 
-                                    onRemove={() => this.handleRemoveItem(key)}
+                                    onRemove={() => this.handleRemoveItem(key)} 
+                                    onUpdate={(text) => this.handleUpdateText(key, text)} 
+                                    onToggleEdit={(editing) => this.handleToggleEditing(key, editing)} 
                                     { ... value }
                                 />
                             )
